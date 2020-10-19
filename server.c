@@ -38,7 +38,7 @@ int server_recieve(server_t* self, char* message, int size) {
 
 	while(received < size) {//o buf len?
 
-		s = recv(source, message, size - received , 0);
+		s = recv(source, message + received, size - received , 0);
 
 		if (s == -1){ //Hubo un error
 

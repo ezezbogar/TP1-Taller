@@ -2,26 +2,27 @@
 #include <stdbool.h>
 #include <string.h>
 
-
-#include "cesar.h"
-
 #include "socket.h"
 #include "client.h"
 
+#define BUFFER_SIZE 32
 
 int main(int argc, char *argv[]) {
 
-
-   char msg[] = "messi flexi";
-
-   printf("%s\n", msg);
-   printf("%i\n", (int)strlen(msg));
+   char buffer[64];
 
    client_t client;
-
    client_init(&client, argv[1], argv[2]);
    client_connect(&client);
-   client_send(&client, msg, 11);
+
+   while(!feof(stdin)) {
+
+      size_t result = fread(buffer, sizeof(char), BUFFER_SIZE, stdin);
+
+      client_send(&client, buffer, (int)result);
+
+   }
+
    client_uninit(&client);
 
 	return 0;

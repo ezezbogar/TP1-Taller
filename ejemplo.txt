@@ -1,1 +1,1 @@
-messiflexi
+hola estoy probando con un archivo largo a ver que onda se explota todo o anda todo perfecto seria clave que funque de perla esto ya son bastantes bytes asi que no se que onda si va a funcar o no. Esto tiene fresca pinta ya no se que escribir supongo que ya me habre excedido de el maximo de caracteres que le puse al buffer asi ue no se que onda
