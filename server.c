@@ -47,7 +47,7 @@ int server_recieve(server_t* self, char* message, int size) {
 
         } else if (s == 0) { //Nos cerraron el socket
 
-        	return 0;
+        	break;
 
         } else {
 
@@ -55,7 +55,7 @@ int server_recieve(server_t* self, char* message, int size) {
 	
         }
 
-     		}
+	}
 
 	return received;
 

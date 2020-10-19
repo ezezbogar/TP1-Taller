@@ -14,26 +14,29 @@
 
 int main(int argc, char *argv[]) {
 
-   server_t server;
-   
-   server_init(&server, argv[1]);
+   char buffer[64];
+   int bytes_received;
 
+   server_t server;
+   server_init(&server, argv[1]);
    server_connect(&server);
 
-   server_recieve(&server, msg, 20);
+   do {
+
+      bytes_received = server_recieve(&server, buffer, BUFFER_SIZE);
+      fwrite(buffer, sizeof(char), bytes_received, stdout);
+
+   }
+   while(bytes_received != 0);
+   
 
    server_uninit(&server);
 
-   printf("%s\n", msg);
+   /*printf("%s\n", msg);
 
-   char buffer[64];
 
-   while(!feof(stdin)) {
 
-      size_t result = fread(buffer, sizeof(char), sizeof(buffer), stdin);
-      fwrite (buffer , sizeof(char), result, stdout);
 
-   }
 
 
    char msg[30];
@@ -53,7 +56,7 @@ int main(int argc, char *argv[]) {
    printf("%d\n", (int)strlen(cosa));
 
    prueba(msg);
-  
 
+   */
 	return 0;
  }
