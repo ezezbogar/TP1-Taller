@@ -4,6 +4,7 @@
 
 #include "socket.h"
 #include "client.h"
+#include "crypter.h"
 
 #define BUFFER_SIZE 32
 

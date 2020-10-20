@@ -2,111 +2,72 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "cesar.h"
-
 #include "socket.h"
 #include "server.h"
-
-//#include "encryptor.h"
-
-
-#define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
-
-unsigned char S[256];
-
-
-void swap(unsigned char *s, unsigned int i, unsigned int j) {
-    unsigned char temp = s[i];
-    s[i] = s[j];
-    s[j] = temp;
-}
-
-/* KSA */
-void rc4_init(unsigned char *key, unsigned int key_length) {
-    
-   unsigned int i, j;
-
-    for (i = 0; i < 256; i++)
-        S[i] = i;
- 
-    for (i = j = 0; i < 256; i++) {
-        j = (j + key[i % key_length] + S[i]) & 255;
-        swap(S, i, j);
-    }
- 
-    i = j = 0;
-}
-
-/* PRGA */
-unsigned char rc4_output() {
-    i = (i + 1) & 255;
-    j = (j + S[i]) & 255;
-
-    swap(S, i, j);
-
-    return S[(S[i] + S[j]) & 255];
-}
-
+#include "crypter.h"
 
 int main(int argc, char *argv[]) {
 
-   
 
-    unsigned char *test_vectors[][2] = 
-    {
-        {"Key", "Plaintext"},
-        {"Wiki", "pedia"},
-        {"Secret", "Attack at dawn"}
-    };
- 
-    printf("%s\n", test_vectors[0][0]);
-    printf("%s\n", test_vectors[0][1]);
-    printf("%s\n", test_vectors[1][0]);
-
-   int x;
-    for (x = 0; x < ARRAY_SIZE(test_vectors); x++) {
-        int y;
-        rc4_init(test_vectors[x][0], strlen((char*)test_vectors[x][0]));
-
-        for (y = 0; y < strlen((char*)test_vectors[x][1]); y++)
-            printf("%02X", test_vectors[x][1][y] ^ rc4_output());
-        printf("\n");
-    }
+  //char msg[] = "Plaintext"; //unsigned char????
+  //char msg[] = "pedia";
 
 
+  char msg[9];
+  msg[0]='P';
+  msg[1]='l';
+  msg[2]='a';
+  msg[3]='i';
+  msg[4]='n';
+  msg[5]='t';
+  msg[6]='e';
+  msg[7]='x';
+  msg[8]='t';
+
+  int i;
+
+  printf("%s\n", msg);
+  printf("%zu\n", strlen(msg));
+
+  crypter_t crypter;
+  crypter_init(&crypter, argv[1], argv[2]);
+
+  crypter_cipher(&crypter, msg, strlen(msg));
+
+  printf("%s\n", msg);
+
+  /*i = atoi(argv[1] + 6);
+
+  char* key = argv[1] + 6;
+
+  printf("%s\n", key);
+  printf("%zu\n", strlen(key));
+  printf("%d\n", i);
+
+  */
+
+  printf("final:\n");
+
+  for(i = 0; i< strlen(msg); i++) {
+
+    printf("%02X ", (unsigned char)msg[i]);
+  }
+  printf("\n");
+
+  crypter_t crypter2;
+  crypter_init(&crypter2, argv[1], argv[2]);
+  crypter_decipher(&crypter2, msg, strlen(msg));
+
+  printf("%s\n", msg);
+  printf("\n");
+
+  for(i = 0; i< strlen(msg); i++) {
+
+    printf("%02X ", (unsigned char)msg[i]);
+  }
+
+  printf("\n");
 
 
-
-
-
-
-
-
-
-
-
-   FILE* fp;
-
-
-   printf("%s\n", argv[1] + 9);
-
-   char buffer[20];
-
-  /* if(file_name != NULL){  // es siempre por stdin, esto esta de mas creo
-
-      fp = fopen(file_name, "rb"); //binary?
-
-   } else { 
-
-      fp = stdin;
-   }*/
-   while(!feof(stdin)) {
-
-      size_t result = fread(buffer, sizeof(char), sizeof(buffer), stdin);
-      fwrite (buffer , sizeof(char), result, stdout);
-
-   }
-
-   printf("%zu", sizeof(char));
    return 0;
  }

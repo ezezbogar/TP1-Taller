@@ -1,5 +1,5 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef CRYPTER_H
+#define CRYPTER_H
 
 #include "socket.h"
 
@@ -10,12 +10,12 @@
 typedef struct {
 
 	int method;
+	int key_size;
 	//Cesar
 	int N;
 	//Vigenere
 	int status;
 	char* vigenere_key;
-	int key_size;
 	//RC4
 	int i,j;
 	unsigned char S[256];
@@ -31,8 +31,4 @@ void crypter_decipher(crypter_t* self, unsigned char* message, int size);
 
 void crypter_uninit(crypter_t* self);
 
-void prueba(char* message);
-
-
-#endif //CLIENT_H
-
+#endif //CRYPTER_H

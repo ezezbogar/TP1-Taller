@@ -43,38 +43,18 @@ int main() {
     unsigned int j = 0;
     unsigned char S[256];
 
-
-    unsigned char message[10];
-
-    message[0]=187;
-    message[1]=243;
-    message[2]=22;
-    message[3]=232;
-    message[4]=217;
-    message[5]=64;
-    message[6]=175;
-    message[7]=10;
-    message[8]=211;
-
-    //unsigned char message[] = "Plaintext";
+    unsigned char message[] = "Plaintext";
     unsigned char key[] = "Key";
-    
-    printf("%zu\n", strlen((char*)message));
     
     rc4_init(key, strlen((char*)key), S, i, j);
 
     int y;
     for (y = 0; y < strlen((char*)message); y++) {
 
-        printf("%d ", message[y] ^ rc4_output(S, &i, &j));
+        printf("%02X ", message[y] ^ rc4_output(S, &i, &j));
     }
 
     printf("\n");
-    getc(stdin);
 
-    char w = 'a';
-
-    printf("%u", (unsigned char)w);
-    printf("%d", (int)w);
     return 0;
 }

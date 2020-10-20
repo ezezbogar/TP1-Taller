@@ -2,12 +2,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-
-#include "cesar.h"
-
 #include "socket.h"
 #include "server.h"
-
 #include "crypter.h"
 
 #define BUFFER_SIZE 32
@@ -32,31 +28,5 @@ int main(int argc, char *argv[]) {
 
    server_uninit(&server);
 
-   /*printf("%s\n", msg);
-
-
-
-
-
-
-   char msg[30];
-
-   printf("%zu\n", strlen(argv[1]));
-
-   char cosa[] = "messi flexi\0";
-   for(int i =0; i<20; i++) {
-      msg[i] = 'a';
-   }
-   printf("%s\n", msg);
-
-   printf("%d\n", (int)strlen(msg));
-
-   printf("%s\n", cosa);
-
-   printf("%d\n", (int)strlen(cosa));
-
-   prueba(msg);
-
-   */
 	return 0;
  }
