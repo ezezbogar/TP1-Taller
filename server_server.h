@@ -8,12 +8,18 @@ typedef struct {
 	socket_t peer, acceptor;
 } server_t;
 
+/* Constructor */
 void server_init(server_t* self, char* port);
 
+/* Recibe del socket peer "size" bytes, o menos si es que nos cierran el
+ * socket y los guarda en message. Devuelve la cantidad de bytes recibidos */
 int server_recieve(server_t* self, char* message, int size);
 
+/* Hace el bind al socket aceptador y conecta el socket peer con
+ * el socket del cliente*/
 void server_connect(server_t* self);
 
+/* Destructor */
 void server_uninit(server_t* self);
 
 #endif  // SERVER_SERVER_H_
