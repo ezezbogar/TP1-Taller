@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
    }
 
    client_uninit(&client);
+   crypter_uninit(&crypter);
 
 	return 0;
  }

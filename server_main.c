@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
       fwrite(buffer, sizeof(char), bytes_received, stdout);
    } while (bytes_received != 0);
    server_uninit(&server);
+   crypter_uninit(&crypter);
 
 	return 0;
 }
