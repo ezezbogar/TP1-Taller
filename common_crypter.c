@@ -23,7 +23,7 @@ void rc4_init(unsigned char *key, unsigned int key_length, unsigned char* S,
 }
  
 /* PRGA */
-unsigned char rc4_output(unsigned char* S, unsigned int* i, unsigned int* j) {
+unsigned char rc4_output(unsigned char* S, int* i, int* j) {
     *i = (*i + 1) & 255;
     *j = (*j + S[*i]) & 255;
 
@@ -121,7 +121,7 @@ int crypter_init(crypter_t* self, char* method, char* key){
 
 		self->i = 0;
 		self->j = 0;
-		self->rc4_key = (key + 6); //--key=<key>
+		self->rc4_key = (unsigned char*)(key + 6); //--key=<key>
 		self->method = RC4;
 
 		rc4_init(self->rc4_key, self->key_size, self->S, self->i, self->j);

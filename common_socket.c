@@ -1,7 +1,6 @@
+#define _POSIX_C_SOURCE 200112L
+
 #include "common_socket.h"
-#include <netdb.h>
-#include <unistd.h>
-#include <string.h>
 
 #define SUCCESS 0
 #define ERROR -1

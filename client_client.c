@@ -1,8 +1,9 @@
+#define _POSIX_C_SOURCE 200112L
+
 #include "client_client.h"
 
 struct addrinfo* _get_address(client_t* self){
 
-	int s;
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -10,7 +11,7 @@ struct addrinfo* _get_address(client_t* self){
     hints.ai_socktype = SOCK_STREAM; 	/* TCP  (or SOCK_DGRAM for UDP)    */
     hints.ai_protocol = 0;          	/* Any protocol */
 
-	s = getaddrinfo(self->host, self->port, &hints, &result);
+	getaddrinfo(self->host, self->port, &hints, &result);
 
 	return result;
 }

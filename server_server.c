@@ -1,3 +1,5 @@
+#define _POSIX_C_SOURCE 200112L
+
 #include "server_server.h"
 
 #define MAX_LISTENERS 10
@@ -6,7 +8,6 @@
 
 struct addrinfo* _get_address(server_t* self) {
 
-	int s;
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -15,12 +16,12 @@ struct addrinfo* _get_address(server_t* self) {
     hints.ai_flags = AI_PASSIVE;    	/* AI_PASSIVE for server           */
     hints.ai_protocol = 0;          	/* Any protocol */
 
-	s = getaddrinfo(NULL, self->port, &hints, &result);
+	getaddrinfo(NULL, self->port, &hints, &result);
 
 	return result;
 }
 
-int server_init(server_t* self, char* port){
+void server_init(server_t* self, char* port){
 
 	self->port = port;
 	socket_init(&self->peer);
@@ -61,7 +62,7 @@ int server_recieve(server_t* self, char* message, int size) {
 
 }
 
-int server_connect(server_t* self) {
+void server_connect(server_t* self) {
 
 	struct addrinfo* address = _get_address(self);
 
@@ -71,11 +72,9 @@ int server_connect(server_t* self) {
 	socket_accept(&self->acceptor, &self->peer);
 }
 
-int server_uninit(server_t* self) {
+void server_uninit(server_t* self) {
 
 	socket_uninit(&self->acceptor);
 	socket_uninit(&self->peer);
-
-	return 0;
 }
 

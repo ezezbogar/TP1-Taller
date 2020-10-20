@@ -1,16 +1,17 @@
+#define _POSIX_C_SOURCE 200112L
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 
-#include "common_socket.h"
 #include "client_client.h"
 #include "common_crypter.h"
 
-#define BUFFER_SIZE 32
+#define BUFFER_SIZE 64
 
 int main(int argc, char *argv[]) {
 
-   char buffer[64];
+   char buffer[BUFFER_SIZE];
 
    crypter_t crypter;
    crypter_init(&crypter, argv[3], argv[4]);
@@ -21,7 +22,7 @@ int main(int argc, char *argv[]) {
    while(!feof(stdin)) {
 
       size_t result = fread(buffer, sizeof(char), BUFFER_SIZE, stdin);
-      crypter_cipher(&crypter, buffer, (int)result);
+      crypter_cipher(&crypter, (unsigned char*)buffer, (int)result);
       client_send(&client, buffer, (int)result);
 
    }
