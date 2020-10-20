@@ -1,5 +1,5 @@
-#ifndef COMMON_SOCKET_H
-#define COMMON_SOCKET_H
+#ifndef COMMON_SOCKET_H_
+#define COMMON_SOCKET_H_
 
 #include <stdio.h>
 #include <errno.h>
@@ -13,7 +13,7 @@
 #include <unistd.h>
 
 typedef struct {
-	int fd; //File descriptor
+	int fd;  // File descriptor
 } socket_t;
 
 void socket_init(socket_t *self);
@@ -32,4 +32,4 @@ int socket_connect(socket_t *self, struct addrinfo* addresses);
 void socket_listen(socket_t* self, int max_waitlist);
 
 
-#endif //COMMON_SOCKET_H
+#endif  // COMMON_SOCKET_H_

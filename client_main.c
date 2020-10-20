@@ -10,7 +10,6 @@
 #define BUFFER_SIZE 64
 
 int main(int argc, char *argv[]) {
-
    char buffer[BUFFER_SIZE];
 
    crypter_t crypter;
@@ -19,12 +18,10 @@ int main(int argc, char *argv[]) {
    client_init(&client, argv[1], argv[2]);
    client_connect(&client);
 
-   while(!feof(stdin)) {
-
+   while (!feof(stdin)) {
       size_t result = fread(buffer, sizeof(char), BUFFER_SIZE, stdin);
       crypter_cipher(&crypter, (unsigned char*)buffer, (int)result);
       client_send(&client, buffer, (int)result);
-
    }
 
    client_uninit(&client);

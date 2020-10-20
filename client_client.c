@@ -2,8 +2,7 @@
 
 #include "client_client.h"
 
-struct addrinfo* _get_address(client_t* self){
-
+struct addrinfo* _get_address(client_t* self) {
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -17,30 +16,23 @@ struct addrinfo* _get_address(client_t* self){
 }
 
 void client_init(client_t* self, char* host, char* port) {
-
 	self->host = host;
 	self->port = port;
 	socket_init(&self->socket);
-
 }
 
 int client_send(client_t* self, char* message, int size) {
-
 	int destination = socket_get_fd(&self->socket);
 	int sent = 0;
-	int s = 0;
 
 	while(sent < size) {
-
-		s = send(destination, message + sent, size - sent, MSG_NOSIGNAL); //MSG_NOSIGNAL?
+		int s = send(destination, message + sent, size - sent, MSG_NOSIGNAL);
 		sent += s;
 	}
-
 	return sent;
 }
 
 void client_connect(client_t* self) {
-
 	struct addrinfo* address = _get_address(self);
 	socket_connect(&self->socket, address);
 	freeaddrinfo(address);

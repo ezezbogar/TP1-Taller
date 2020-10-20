@@ -7,7 +7,6 @@
 #define ERROR -1
 
 struct addrinfo* _get_address(server_t* self) {
-
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -21,49 +20,31 @@ struct addrinfo* _get_address(server_t* self) {
 	return result;
 }
 
-void server_init(server_t* self, char* port){
-
+void server_init(server_t* self, char* port) {
 	self->port = port;
 	socket_init(&self->peer);
 	socket_init(&self->acceptor);
-
-	//copiar puntero?
 }
 
 int server_recieve(server_t* self, char* message, int size) {
-
 	int source = socket_get_fd(&self->peer);
-
 	int received = 0;
-	int s = 0;
 
-	while(received < size) {//o buf len?
-
-		s = recv(source, message + received, size - received , 0);
-
-		if (s == -1){ //Hubo un error
-
-			fprintf(stderr,"Error: %s\n", strerror(errno));
+	while(received < size) {
+		int s = recv(source, message + received, size - received , 0);
+		if (s == -1) {
+			fprintf(stderr, "Error: %s\n", strerror(errno));
             return ERROR;
-
-        } else if (s == 0) { //Nos cerraron el socket
-
+        } else if (s == 0) {
         	break;
-
         } else {
-
         	received += s;
-	
         }
-
 	}
-
 	return received;
-
 }
 
 void server_connect(server_t* self) {
-
 	struct addrinfo* address = _get_address(self);
 
 	socket_bind(&self->acceptor, address);
@@ -73,7 +54,6 @@ void server_connect(server_t* self) {
 }
 
 void server_uninit(server_t* self) {
-
 	socket_uninit(&self->acceptor);
 	socket_uninit(&self->peer);
 }

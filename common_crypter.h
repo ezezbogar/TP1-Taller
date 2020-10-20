@@ -1,5 +1,5 @@
-#ifndef COMMON_CRYPTER_H
-#define COMMON_CRYPTER_H
+#ifndef COMMON_CRYPTER_H_
+#define COMMON_CRYPTER_H_
 
 #include <stdio.h>
 #include <errno.h>
@@ -12,19 +12,17 @@
 #define RC4 2
 
 typedef struct {
-
 	int method;
 	int key_size;
-	//Cesar
+	// Cesar
 	int N;
-	//Vigenere
+	// Vigenere
 	int status;
 	char* vigenere_key;
-	//RC4
-	int i,j;
+	// RC4
+	int i, j;
 	unsigned char S[256];
 	unsigned char* rc4_key;
-
 } crypter_t;
 
 int crypter_init(crypter_t* self, char* method, char* key);
@@ -35,4 +33,4 @@ void crypter_decipher(crypter_t* self, unsigned char* message, int size);
 
 void crypter_uninit(crypter_t* self);
 
-#endif //COMMON_CRYPTER_H
+#endif  // COMMON_CRYPTER_H_

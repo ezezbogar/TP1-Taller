@@ -10,29 +10,21 @@
 #define BUFFER_SIZE 64
 
 int main(int argc, char *argv[]) {
-
    char buffer[BUFFER_SIZE];
    int bytes_received;
 
    crypter_t crypter;
    crypter_init(&crypter, argv[2], argv[3]);
-
    server_t server;
    server_init(&server, argv[1]);
    server_connect(&server);
 
    do {
-
       bytes_received = server_recieve(&server, buffer, BUFFER_SIZE);
       crypter_decipher(&crypter, (unsigned char*)buffer, bytes_received);
       fwrite(buffer, sizeof(char), bytes_received, stdout);
-
-   }
-   while(bytes_received != 0);
-   
-
-   //crypter uninit?
+   } while (bytes_received != 0);
    server_uninit(&server);
 
 	return 0;
- }
+}

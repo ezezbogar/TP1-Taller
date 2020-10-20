@@ -1,13 +1,11 @@
-#ifndef SERVER_SERVER_H
-#define SERVER_SERVER_H
+#ifndef SERVER_SERVER_H_
+#define SERVER_SERVER_H_
 
 #include "common_socket.h"
 
 typedef struct {
-
 	char* port;
 	socket_t peer, acceptor;
-
 } server_t;
 
 void server_init(server_t* self, char* port);
@@ -18,10 +16,4 @@ void server_connect(server_t* self);
 
 void server_uninit(server_t* self);
 
-
-
-
-
-
-
-#endif //SERVER_SERVER_H
+#endif  // SERVER_SERVER_H_
