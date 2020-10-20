@@ -1,5 +1,5 @@
-#ifndef SOCKET_H
-#define SOCKET_H
+#ifndef COMMON_SOCKET_H
+#define COMMON_SOCKET_H
 
 #include <stdio.h>
 #include <errno.h>
@@ -36,4 +36,4 @@ ssize_t socket_send(socket_t *self, const char *buffer, size_t length); //Borrar
 
 ssize_t socket_receive(socket_t *self, char *buffer, size_t length); //Borrar
 
-#endif //SOCKET_H
+#endif //COMMON_SOCKET_H

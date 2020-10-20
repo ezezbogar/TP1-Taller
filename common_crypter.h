@@ -1,5 +1,5 @@
-#ifndef CRYPTER_H
-#define CRYPTER_H
+#ifndef COMMON_CRYPTER_H
+#define COMMON_CRYPTER_H
 
 #include <stdio.h>
 #include <errno.h>
@@ -35,4 +35,4 @@ void crypter_decipher(crypter_t* self, unsigned char* message, int size);
 
 void crypter_uninit(crypter_t* self);
 
-#endif //CRYPTER_H
+#endif //COMMON_CRYPTER_H

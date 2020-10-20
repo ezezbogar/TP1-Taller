@@ -2,9 +2,9 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "socket.h"
-#include "server.h"
-#include "crypter.h"
+#include "common_socket.h"
+#include "server_server.h"
+#include "common_crypter.h"
 
 #define BUFFER_SIZE 32
 

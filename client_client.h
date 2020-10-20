@@ -1,7 +1,7 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef CLIENT_CLIENT_H
+#define CLIENT_CLIENT_H
 
-#include "socket.h"
+#include "common_socket.h"
 
 typedef struct {
 
@@ -19,5 +19,5 @@ void client_connect(client_t* self);
 
 void client_uninit(client_t* self);
 
-#endif //CLIENT_H
+#endif //CLIENT_CLIENT_H
 

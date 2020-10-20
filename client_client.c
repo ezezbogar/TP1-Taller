@@ -1,4 +1,4 @@
-#include "client.h"
+#include "client_client.h"
 
 struct addrinfo* _get_address(client_t* self){
 

@@ -1,7 +1,7 @@
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef SERVER_SERVER_H
+#define SERVER_SERVER_H
 
-#include "socket.h"
+#include "common_socket.h"
 
 typedef struct {
 
@@ -24,4 +24,4 @@ int server_uninit(server_t* self);
 
 
 
-#endif //SERVER_H
+#endif //SERVER_SERVER_H

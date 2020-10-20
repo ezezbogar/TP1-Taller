@@ -1,4 +1,4 @@
-#include "crypter.h"
+#include "common_crypter.h"
 
 #define CESAR 0
 #define VIGENERE 1
