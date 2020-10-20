@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "socket.h"
-#include "server.h"
+//#include "socket.h"
+//#include "server.h"
 #include "crypter.h"
 
 int main(int argc, char *argv[]) {

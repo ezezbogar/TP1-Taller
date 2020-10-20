@@ -1,7 +1,11 @@
 #ifndef CRYPTER_H
 #define CRYPTER_H
 
-#include "socket.h"
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #define CESAR 0
 #define VIGENERE 1
