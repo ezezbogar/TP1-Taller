@@ -22,3 +22,4 @@
 
 ​	Tanto para el cliente como para el servidor el hecho de que el texto se lea de a chunks genera la necesidad de almacenar el "estado" en el que se encuentra el cifrado, que varia con cada método. Con Vigenere es necesario guardar que posición del la key se sumo/resto al ultimo byte cifrado ya que seria un error comenzar desde la posición cero con cada chunk que se quiere cifrar/descifrar. Con RC4 sucede lo mismo, es necesario almacenar el valor de `i` y `j` para partir de ese estado cuando se quiere comenzar a cifrar un chunk nuevo. 
 
+- Link al repositorio de GitHub: https://github.com/ezezbogar/TP0-Taller
