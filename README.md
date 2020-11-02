@@ -23,3 +23,35 @@
 ​	Tanto para el cliente como para el servidor el hecho de que el texto se lea de a chunks genera la necesidad de almacenar el "estado" en el que se encuentra el cifrado, que varia con cada método. Con Vigenere es necesario guardar que posición del la key se sumo/resto al ultimo byte cifrado ya que seria un error comenzar desde la posición cero con cada chunk que se quiere cifrar/descifrar. Con RC4 sucede lo mismo, es necesario almacenar el valor de `i` y `j` para partir de ese estado cuando se quiere comenzar a cifrar un chunk nuevo. 
 
 - Link al repositorio de GitHub: https://github.com/ezezbogar/TP0-Taller
+
+#### Reentrega
+
+A continuación se listan los cambios realizados para la reentrega:
+
+##### Issue 1: Documentar TDAs y métodos
+
+​	Se agrega documentación a los TDAs
+
+##### Issue 2: Loop de getaddrinfo
+
+​	El loop de candidatos a hacer connect y bind ya está implementado en la biblioteca `common_socket` en los respectivos métodos `socket_connect` y `socket_bind`. En las dos lineas citadas en las cuales solo se hace el getaddrinfo (Se encuentra en la función privada `_get_address` específica para eso, la cual devuelve un `struct addrinfo*`) luego se itera hasta encontrar un candidato para establecer la conexión.
+
+##### Issue 3: No propagar POSIX_C_SOURCE
+
+​	Si bien el issue dice "Quitar `#define _POSIX_C_SOURCE 200112L` del header" no hay ningún header que lo posea.
+
+##### Issue 4: Validar argumentos de main
+
+​	Tanto en `client_main.c` como en `server_main.c` se validan que estén la cantidad de argumentos necesarios. También se movió el loop de lectura de `stdin` a un método `client_run` y el loop de escritura de `stdout` a `server_run`.
+
+##### Issue 5: No incluir headers innecesariamente
+
+​	Se quitaron los headers innecesarios. Ademas se quitaron y se pasaron a las unidades de compilación todos los headers que fueron posibles.
+
+##### Issue 6: Usar static en los métodos "privados"
+
+​	Dentro de cada unidad de compilación se marcaron como "static" los métodos "privados" para que su scope este limitado a ese object file.
+
+##### Issue 7: Reestructurar TDA socket
+
+​	Ahora el TDA socket es el que implementa el `send` y `receive` en los métodos `socket_send` y `socket_recieve` respectivamente.
