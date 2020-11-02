@@ -14,8 +14,8 @@ static void swap(unsigned char *s, unsigned int i, unsigned int j) {
 }
 
 /* KSA */
-static void rc4_init(unsigned char *key, unsigned int key_length, unsigned char* S,
-            unsigned int i, unsigned int j) {
+static void rc4_init(unsigned char *key, unsigned int key_length,
+	unsigned char* S, unsigned int i, unsigned int j) {
     for (i = 0; i < 256; i++)
         S[i] = i;
 
@@ -49,7 +49,8 @@ static void _cesar_decipher(crypter_t* self, unsigned char* message, int size) {
 	}
 }
 
-static void _vigenere_cipher(crypter_t* self, unsigned char* message, int size) {
+static void _vigenere_cipher(crypter_t* self, unsigned char* message,
+							int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] + self->vigenere_key[self->status];
@@ -60,7 +61,8 @@ static void _vigenere_cipher(crypter_t* self, unsigned char* message, int size) 
 	}
 }
 
-static void _vigenere_decipher(crypter_t* self, unsigned char* message, int size) {
+static void _vigenere_decipher(crypter_t* self, unsigned char* message,
+							int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] - self->vigenere_key[self->status];
@@ -71,7 +73,8 @@ static void _vigenere_decipher(crypter_t* self, unsigned char* message, int size
 	}
 }
 
-static void _rc4_cipher_decipher(crypter_t* self, unsigned char* message, int size) {
+static void _rc4_cipher_decipher(crypter_t* self, unsigned char* message,
+							int size) {
     int y;
     for (y = 0; y < size; y++) {
     	message[y] = (message[y] ^ rc4_output(self->S, &self->i, &self->j));

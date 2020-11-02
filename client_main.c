@@ -9,7 +9,7 @@
 #define ERROR -1
 
 int main(int argc, char *argv[]) {
-   if(argc != 5) {
+   if (argc != 5) {
       fprintf(stderr, "Argumentos Invalidos\n");
       return ERROR;
    }
