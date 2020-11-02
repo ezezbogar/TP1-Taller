@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e744c1c9-c31f-4393-ac15-6683d666dc91" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/archivos.c" beforeDir="false" afterPath="$PROJECT_DIR$/archivos.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +45,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="e744c1c9-c31f-4393-ac15-6683d666dc91" name="Default Changelist" comment="" />
@@ -54,7 +55,17 @@
       <updated>1603070238248</updated>
       <workItem from="1603070240697" duration="2000" />
       <workItem from="1603157766093" duration="7000" />
+      <workItem from="1603321662774" duration="865000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="485" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1603322502196">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="485" y="188" width="1022" height="737" key="SettingsEditor/72.27.1848.1053@72.27.1848.1053" timestamp="1603322502196" />
   </component>
 </project>

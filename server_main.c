@@ -1,15 +1,19 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
 
 #include "server_server.h"
 #include "common_crypter.h"
 
 #define BUFFER_SIZE 64
+#define ERROR -1
 
 int main(int argc, char *argv[]) {
+   if(argc != 4) {
+      fprintf(stderr, "Argumentos Invalidos\n");
+      return ERROR;
+   }
+
    char buffer[BUFFER_SIZE];
    int bytes_received;
 

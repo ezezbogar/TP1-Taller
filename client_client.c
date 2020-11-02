@@ -1,8 +1,9 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include "client_client.h"
+#include <string.h>
 
-struct addrinfo* _get_address(client_t* self) {
+static struct addrinfo* _get_address(client_t* self) {
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -22,14 +23,9 @@ void client_init(client_t* self, char* host, char* port) {
 }
 
 int client_send(client_t* self, char* message, int size) {
-	int destination = socket_get_fd(&self->socket);
-	int sent = 0;
-
-	while(sent < size) {
-		int s = send(destination, message + sent, size - sent, MSG_NOSIGNAL);
-		sent += s;
-	}
-	return sent;
+	int bytes_sent;
+	bytes_sent = socket_send(&self->socket, message, size);
+	return bytes_sent;
 }
 
 void client_connect(client_t* self) {

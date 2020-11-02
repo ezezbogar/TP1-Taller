@@ -1,6 +1,9 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include "common_socket.h"
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
 
 #define SUCCESS 0
 #define ERROR -1
@@ -58,6 +61,35 @@ int socket_accept(socket_t *listener, socket_t* peer) {
 void socket_uninit(socket_t* self) {
 	shutdown(self->fd, SHUT_RDWR);
     close(self->fd);
+}
+
+int socket_send(socket_t* self, char* message, int size) {
+	int destination = socket_get_fd(self);
+	int sent = 0;
+
+	while(sent < size) {
+		int s = send(destination, message + sent, size - sent, MSG_NOSIGNAL);
+		sent += s;
+	}
+	return sent;
+}
+
+int socket_receive(socket_t* self, char* message, int size) {
+	int source = socket_get_fd(self);
+	int received = 0;
+
+	while(received < size) {
+		int s = recv(source, message + received, size - received , 0);
+		if (s == -1) {
+			fprintf(stderr, "Error: %s\n", strerror(errno));
+            return ERROR;
+        } else if (s == 0) {
+        	break;
+        } else {
+        	received += s;
+        }
+	}
+	return received;
 }
 
 void socket_listen(socket_t* self, int max_waitlist) {

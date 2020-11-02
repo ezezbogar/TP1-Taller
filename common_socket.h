@@ -1,12 +1,6 @@
 #ifndef COMMON_SOCKET_H_
 #define COMMON_SOCKET_H_
 
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -37,6 +31,10 @@ int socket_connect(socket_t *self, struct addrinfo* addresses);
 /* Define la cantidad de clientes que pueden estar a la espera de 
  * conectarse a algun peer */
 void socket_listen(socket_t* self, int max_waitlist);
+
+int socket_send(socket_t* self, char* message, int size);
+
+int socket_receive(socket_t* self, char* message, int size);
 
 /* Destructor */
 void socket_uninit(socket_t *self);

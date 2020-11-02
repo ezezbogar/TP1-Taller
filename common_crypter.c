@@ -1,17 +1,20 @@
 #include "common_crypter.h"
 
+#include <string.h>
+#include <stdlib.h>
+
 #define CESAR 0
 #define VIGENERE 1
 #define RC4 2
 
-void swap(unsigned char *s, unsigned int i, unsigned int j) {
+static void swap(unsigned char *s, unsigned int i, unsigned int j) {
     unsigned char temp = s[i];
     s[i] = s[j];
     s[j] = temp;
 }
 
 /* KSA */
-void rc4_init(unsigned char *key, unsigned int key_length, unsigned char* S,
+static void rc4_init(unsigned char *key, unsigned int key_length, unsigned char* S,
             unsigned int i, unsigned int j) {
     for (i = 0; i < 256; i++)
         S[i] = i;
@@ -23,7 +26,7 @@ void rc4_init(unsigned char *key, unsigned int key_length, unsigned char* S,
 }
 
 /* PRGA */
-unsigned char rc4_output(unsigned char* S, int* i, int* j) {
+static unsigned char rc4_output(unsigned char* S, int* i, int* j) {
     *i = (*i + 1) & 255;
     *j = (*j + S[*i]) & 255;
 
@@ -32,21 +35,21 @@ unsigned char rc4_output(unsigned char* S, int* i, int* j) {
     return S[(S[*i] + S[*j]) & 255];
 }
 
-void _cesar_cipher(crypter_t* self, unsigned char* message, int size) {
+static void _cesar_cipher(crypter_t* self, unsigned char* message, int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] + (self->N);
 	}
 }
 
-void _cesar_decipher(crypter_t* self, unsigned char* message, int size) {
+static void _cesar_decipher(crypter_t* self, unsigned char* message, int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] - (self->N);
 	}
 }
 
-void _vigenere_cipher(crypter_t* self, unsigned char* message, int size) {
+static void _vigenere_cipher(crypter_t* self, unsigned char* message, int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] + self->vigenere_key[self->status];
@@ -57,7 +60,7 @@ void _vigenere_cipher(crypter_t* self, unsigned char* message, int size) {
 	}
 }
 
-void _vigenere_decipher(crypter_t* self, unsigned char* message, int size) {
+static void _vigenere_decipher(crypter_t* self, unsigned char* message, int size) {
 	int i = 0;
 	for(i = 0; i < size; i++) {
 		message[i] = message[i] - self->vigenere_key[self->status];
@@ -68,7 +71,7 @@ void _vigenere_decipher(crypter_t* self, unsigned char* message, int size) {
 	}
 }
 
-void _rc4_cipher_decipher(crypter_t* self, unsigned char* message, int size) {
+static void _rc4_cipher_decipher(crypter_t* self, unsigned char* message, int size) {
     int y;
     for (y = 0; y < size; y++) {
     	message[y] = (message[y] ^ rc4_output(self->S, &self->i, &self->j));

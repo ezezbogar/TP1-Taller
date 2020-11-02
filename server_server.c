@@ -1,12 +1,13 @@
 #define _POSIX_C_SOURCE 200112L
 
 #include "server_server.h"
+#include <string.h>
 
 #define MAX_LISTENERS 10
 #define SUCCESS 0
 #define ERROR -1
 
-struct addrinfo* _get_address(server_t* self) {
+static struct addrinfo* _get_address(server_t* self) {
 	struct addrinfo hints, *result;
 
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -27,21 +28,9 @@ void server_init(server_t* self, char* port) {
 }
 
 int server_recieve(server_t* self, char* message, int size) {
-	int source = socket_get_fd(&self->peer);
-	int received = 0;
-
-	while(received < size) {
-		int s = recv(source, message + received, size - received , 0);
-		if (s == -1) {
-			fprintf(stderr, "Error: %s\n", strerror(errno));
-            return ERROR;
-        } else if (s == 0) {
-        	break;
-        } else {
-        	received += s;
-        }
-	}
-	return received;
+	int bytes_received;
+	bytes_received = socket_receive(&self->peer, message, size);
+	return bytes_received;
 }
 
 void server_connect(server_t* self) {

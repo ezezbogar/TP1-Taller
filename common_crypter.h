@@ -1,12 +1,6 @@
 #ifndef COMMON_CRYPTER_H_
 #define COMMON_CRYPTER_H_
 
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #define CESAR 0
 #define VIGENERE 1
 #define RC4 2
