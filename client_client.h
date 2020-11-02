@@ -4,6 +4,9 @@
 #include "common_socket.h"
 #include "common_crypter.h"
 
+/* El TDA client permite conectarse al puerto y direccion ip especificados
+ * y enviar bytes cifrados a un servidor*/
+
 typedef struct {
 	char* host;
 	char* port;
@@ -20,6 +23,8 @@ void client_connect(client_t* self);
  * esta manteniendo una conexion. Devuelve la cantidad de bytes enviados */
 int client_send(client_t* self, char* message, int size);
 
+/* Cifra los bytes leidos y los envia hasta que se termina el archivo
+ * de entrada */
 void client_run(client_t* self, crypter_t* crypter);
 
 /* Destructor */

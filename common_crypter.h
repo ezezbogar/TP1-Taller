@@ -5,6 +5,9 @@
 #define VIGENERE 1
 #define RC4 2
 
+/* El TDA crypter implementa diferentes metodos de cifrado de clave simetrica. Ademas
+ * este guarda el estado del cifrado para poder procesar de a buffers */
+
 typedef struct {
 	int method;
 	int key_size;

@@ -6,6 +6,9 @@
 #include <netdb.h>
 #include <unistd.h>
 
+/* El TDA socket implementa los metodos elementales para poder establecer
+ * una conexion cliente-servidor y transferir bytes entre ellos */
+
 typedef struct {
 	int fd;  // File descriptor
 } socket_t;
@@ -20,20 +23,24 @@ int socket_get_fd(socket_t* self);
  * -1 ante algun error, 0 en caso de exito */
 int socket_bind(socket_t *self, struct addrinfo* addresses);
 
-/* Deja el socket a la espera de alguna conexion entrante hasta que algun 
+/* Deja el socket a la espera de alguna conexion entrante hasta que algun
  * cliente se conecte. Devuelve -1 ante algun error, 0 en caso de exito */
 int socket_accept(socket_t *self, socket_t* peer);
 
-/* Conecta el socket a algun peer del servidor. Devuelve -1 ante algun 
+/* Conecta el socket a algun peer del servidor. Devuelve -1 ante algun
  * error, 0 en caso de exito */
 int socket_connect(socket_t *self, struct addrinfo* addresses);
 
-/* Define la cantidad de clientes que pueden estar a la espera de 
+/* Define la cantidad de clientes que pueden estar a la espera de
  * conectarse a algun peer */
 void socket_listen(socket_t* self, int max_waitlist);
 
+/* Envia por el socket size bytes del array message. Devuelve la
+ * cantidad de bytes enviados */
 int socket_send(socket_t* self, char* message, int size);
 
+/* Recibe size bytes (o menos) y los guarda en el array message
+ * Devuelve la cantidad de bytes recibidos */
 int socket_receive(socket_t* self, char* message, int size);
 
 /* Destructor */

@@ -4,6 +4,11 @@
 #include "common_socket.h"
 #include "common_crypter.h"
 
+/* El TDA server permite permanecer a la espera de conexiones entrantes para
+ * establecerlas y recibir bytes cifrados de un cliente para descifrarlos e 
+ * imprimirlos por pantalla */
+
+
 typedef struct {
 	char* port;
 	socket_t peer, acceptor;
@@ -20,6 +25,8 @@ int server_recieve(server_t* self, char* message, int size);
  * el socket del cliente*/
 void server_connect(server_t* self);
 
+/* Recive, descifra e imprime por pantalla los bytes recibidos hasta 
+ * que se cierra la conexion */
 void server_run(server_t* self, crypter_t* crypter);
 
 /* Destructor */
