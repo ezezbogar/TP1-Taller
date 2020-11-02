@@ -2,6 +2,7 @@
 #define CLIENT_CLIENT_H_
 
 #include "common_socket.h"
+#include "common_crypter.h"
 
 typedef struct {
 	char* host;
@@ -18,6 +19,8 @@ void client_connect(client_t* self);
 /* Envia los primeros "size" bytes de "message" al server con el cual
  * esta manteniendo una conexion. Devuelve la cantidad de bytes enviados */
 int client_send(client_t* self, char* message, int size);
+
+void client_run(client_t* self, crypter_t* crypter);
 
 /* Destructor */
 void client_uninit(client_t* self);

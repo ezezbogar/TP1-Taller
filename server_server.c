@@ -1,7 +1,9 @@
 #define _POSIX_C_SOURCE 200112L
+#define BUFFER_SIZE 64
 
 #include "server_server.h"
 #include <string.h>
+#include <stdio.h>
 
 #define MAX_LISTENERS 10
 #define SUCCESS 0
@@ -40,6 +42,17 @@ void server_connect(server_t* self) {
 	freeaddrinfo(address);
 	socket_listen(&self->acceptor, MAX_LISTENERS);
 	socket_accept(&self->acceptor, &self->peer);
+}
+
+void server_run(server_t* self, crypter_t* crypter) {
+	char buffer[BUFFER_SIZE];
+	int bytes_received;
+
+	do {
+		bytes_received = server_recieve(self, buffer, BUFFER_SIZE);
+		crypter_decipher(crypter, (unsigned char*)buffer, bytes_received);
+		fwrite(buffer, sizeof(char), bytes_received, stdout);
+	} while (bytes_received != 0);
 }
 
 void server_uninit(server_t* self) {

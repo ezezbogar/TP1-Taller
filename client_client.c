@@ -1,7 +1,9 @@
 #define _POSIX_C_SOURCE 200112L
+#define BUFFER_SIZE 64
 
 #include "client_client.h"
 #include <string.h>
+#include <stdio.h>
 
 static struct addrinfo* _get_address(client_t* self) {
 	struct addrinfo hints, *result;
@@ -32,6 +34,16 @@ void client_connect(client_t* self) {
 	struct addrinfo* address = _get_address(self);
 	socket_connect(&self->socket, address);
 	freeaddrinfo(address);
+}
+
+void client_run(client_t* self, crypter_t* crypter) {
+	char buffer[BUFFER_SIZE];
+
+	while (!feof(stdin)) {
+      size_t result = fread(buffer, sizeof(char), BUFFER_SIZE, stdin);
+      crypter_cipher(crypter, (unsigned char*)buffer, (int)result);
+      client_send(self, buffer, (int)result);
+   }
 }
 
 void client_uninit(client_t* self) {
